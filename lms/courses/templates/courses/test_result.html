@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Результаты теста: {{ test.title }}</h2>
+    <p>Правильных ответов: {{ correct_count }} из {{ total_questions }}</p>
+    <ul>
+        {% for answer in student_answers %}
+            <li>
+                Вопрос: {{ answer.question.text }}<br>
+                Ваш ответ: {{ answer.answer.text }}<br>
+                {% if answer.answer.is_correct %}
+                    <span class="text-success">Правильно</span>
+                {% else %}
+                    <span class="text-danger">Неправильно</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

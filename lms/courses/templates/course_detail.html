@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ course.name }}{% endblock %}
+
+{% block content %}
+<h2>{{ course.name }}</h2>
+<p>{{ course.description }}</p>
+<h3>Topics</h3>
+<ul>
+    {% for topic in course.topics.all %}
+    <li>{{ topic.title }}</li>
+    {% endfor %}
+</ul>
+{% if user.groups.filter(name='Students').exists %}
+    <a href="{% url 'submit_homework' topic.id %}">Submit Homework</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Тест: {{ test.title }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for question in test.questions.all %}
+            <div class="mb-4">
+                <h4>{{ question.text }}</h4>
+                {% for answer in question.answers.all %}
+                    <div>
+                        <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}">
+                        <label>{{ answer.text }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Review Homework{% endblock %}
+
+{% block content %}
+<h2>Review Homework</h2>
+<p>Submitted by: {{ homework.student.username }}</p>
+{% if homework.file %}
+    <p>File: <a href="{{ homework.file.url }}">Download</a></p>
+{% endif %}
+{% if homework.link %}
+    <p>Link: <a href="{{ homework.link }}">{{ homework.link }}</a></p>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Add Comment</button>
+</form>
+{% endblock %}
